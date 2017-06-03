@@ -35,22 +35,20 @@ $(function(){
 		$points.eq(nowli).addClass('active').siblings().removeClass('active');
 	}
 
-	$points.click(function(event) {
-		if(ismove)
-		{
-			return;
-		}
-		nowli = $(this).index();
+    $points.click(
+        function (event) {
+            if (ismove) {
+                return;
+            }
+            nowli = $(this).index();
 
-		if(nowli==prevli)
-		{
-			return;
-		}
-		
-		$(this).addClass('active').siblings().removeClass('active');
-		move();
+            if (nowli == prevli) {
+                return;
+            }
 
-	});
+            $(this).addClass('active').siblings().removeClass('active');
+            move();
+        });
 
 	$prev.click(function() {
 		if(ismove)
@@ -82,7 +80,7 @@ $(function(){
 		if(nowli<0)
 		{
 			nowli=len-1;
-			prevli = 0
+			prevli = 0;
 			$slides.eq(nowli).css({left:-760});
 			$slides.eq(nowli).animate({left:0},800,'easeOutExpo');
 			$slides.eq(prevli).animate({left:760},800,'easeOutExpo',function(){
@@ -127,4 +125,4 @@ $(function(){
 		}
 
 	}
-})
+});

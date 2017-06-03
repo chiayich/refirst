@@ -99,3 +99,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+!/dailyfresh/templates/df_user/user_center_order.html

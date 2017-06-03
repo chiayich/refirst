@@ -1,0 +1,83 @@
+{% extends 'base_foot.html' %}
+{% block head %}
+    <script>
+        $(function () {
+            var name_error = false;
+            var password_error = false;
+            var error_name = {{ error_name }}?{{ error_name }}:0;
+            var error_pwd = {{ error_password }}?{{ error_password }}:0;
+            if (error_pwd===1 || error_name===1){
+                $('.pwd_error').html('user name or password error!').show();
+            }
+
+            function name_input_blur() {
+                if ($(this).val().length == 0) {
+                    $('.user_error').html('please input user name').show();
+                    name_error = false;
+                } else {
+                    $('.user_error').hide();
+                    name_error = true;
+                }
+            }
+            $('.name_input').on('blur', name_input_blur);
+
+            function pass_input_blur() {
+                if ($(this).val().length == 0) {
+                    $('.pwd_error').html('please input pass word').show();
+                    password_error = false;
+                } else {
+                    $('.pwd_error').hide();
+                    password_error = true;
+                }
+            }
+
+            $('.pass_input').on('blur', pass_input_blur);
+            function submit_param() {
+                $('.name_input').blur();
+                $('.pass_input').blur();
+                return name_error&&password_error;
+            }
+            $('form').submit(submit_param);
+        })
+    </script>
+{% endblock head %}
+{% block body %}
+
+	<div class="login_top clearfix">
+		<a href="/" class="login_logo"><img src="/static/images/logo02.png"></a>
+	</div>
+
+	<div class="login_form_bg">
+		<div class="login_form_wrap clearfix">
+			<div class="login_banner fl"></div>
+			<div class="slogan fl">日夜兼程 · 急速送达</div>
+			<div class="login_form fr">
+				<div class="login_title clearfix">
+					<h1>用户登录</h1>
+					<a href="/user/register/">立即注册</a>
+				</div>
+				<div class="form_input">
+					<form action="/user/login_handle/" method="post">
+                        {% csrf_token %}
+						<input type="text" name="user_name" class="name_input"
+                              value="{{ user_name }}" placeholder="请输入用户名">
+						<div class="user_error">输入错误</div>
+						<input type="password" name="user_password"
+                               class="pass_input"
+                               value="{{ user_password }}"
+                               placeholder="请输入密码xxxx">
+						<div class="pwd_error">输入错误</div>
+						<div class="more_input clear_fix">
+							<input type="checkbox" name="keep_name"
+                                   value="1" checked="checked">
+							<label>记住用户名</label>
+							<a href="#">忘记密码</a>
+						</div>
+						<input type="submit" value="登录" class="input_submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock body %}
