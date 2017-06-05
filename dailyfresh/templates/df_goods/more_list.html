@@ -5,17 +5,17 @@
 		<div class="r_wrap fr clearfix">
 			<div class="sort_bar">
 				<a href="/more_list/?tid={{typeinfo.id}}&&sort=1&&pindex=1"
-				{%if sort == "1"%}
+				{% if sort ==='1' %}
 				 class="active"
 				{%endif%}
 				>默认</a>
 				<a href="/more_list/?tid={{typeinfo.id}}&&sort=2&&pindex=1"
-				{%if sort == "2"%}
+				{%if sort =="2"%}
 				 class="active"
 				{%endif%}
 				>价格</a>
 				<a href="/more_list/?tid={{typeinfo.id}}&&sort=3&&pindex=1"
-				{%if sort == "3"%}
+				{%if sort =="3"%}
 				 class="active"
 				{%endif%}
 				>人气</a>
@@ -38,7 +38,7 @@
 
 			<div class="pagenation">
 				{%if page.has_previous%}
-				<a href="/list{{typeinfo.id}}_{{page.previous_page_number}}_{{sort}}/"><上一页</a>
+				<a href="/list{{typeinfo.id}}_{{page.previous_page_number}}_{{sort}}/">&lt;上一页</a>
 				{%endif%}
 
 				{%for pindex in paginator.page_range%}
@@ -50,7 +50,7 @@
 				{%endfor%}
 
 				{%if page.has_next%}
-				<a href="/list{{typeinfo.id}}_{{page.next_page_number}}_{{sort}}/">下一页></a>
+				<a href="/list{{typeinfo.id}}_{{page.next_page_number}}_{{sort}}/">下一页&gt;</a>
 				{%endif%}
 			</div>
 		</div>
