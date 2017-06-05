@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block head %}
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/oslidediv.js"></script>
+    <script src="/static/js/list_model_div.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $(".slide").each(function(){
+                new ObjSlideDiv([
+                    "slide.jpg",
+                    "slide02.jpg",
+                    "slide03.jpg",
+                    "slide04.jpg"
+                ], $(this))});
+            let sub = $('.subnav').children('input');
+            $.each(sub, (index, item)=>{
+                let ls = $(item).val().split(',');
+                $('#content_container').each(function (){
+                new ListModelDiv(ls, $(this));
+            });
+            });
+
+        });
+    </script>
+{% endblock head %}
+
+
+{% block content %}
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			<ul class="navlist fl">
+				<li><a href="">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+            {% for t in type_list %}
+            <li><a href="#" class="{{ t.css_class }}" >{{ t.title }}</a></li>
+            <input type="hidden" value="{{ t.id }},{{t.title}},{{ t.img_show }}">
+            {% endfor %}
+		</ul>
+		<div class="slide fl"></div>
+		<div class="adv fl">
+			<a href="#"><img src="/static/images/adv01.jpg"></a>
+			<a href="#"><img src="/static/images/adv02.jpg"></a>
+		</div>
+	</div>
+
+{% endblock content %}

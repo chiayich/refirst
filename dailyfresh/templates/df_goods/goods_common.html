@@ -1,0 +1,73 @@
+{%extends 'base.html'%}
+
+
+{% block head %}
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/list_model_div.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            let sub = $('.subnav').children('input');
+            $.each(sub, (index, item)=>{
+                let ls = $(item).val().split(',');
+                console.log(ls);
+            });
+
+        });
+    </script>
+{% endblock head %}
+{%block content%}
+
+	<div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+                    {% for t in type_list %}
+                    <li><a href="#" class="{{ t.css_class }}" >{{ t.title }}</a></li>
+                    <input type="hidden" value="{{ t.id }},{{t.title}}">
+                    {% endfor %}
+    				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="breadcrumb">
+		&nbsp;&nbsp;全部分类&nbsp;>&nbsp;{{title}}
+        {%if id|default:'' != ''%}
+        &nbsp;>&nbsp;商品详情
+        {%endif%}
+	</div>
+
+{%block detail%}{%endblock detail%}
+
+	<div class="main_wrap clearfix">
+
+        <div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+					{%for new in news%}
+					<li>
+						<a href="/{{new.id}}/"><img src="/static/{{new.pic}}"></a>
+						<h4><a href="/{{new.id}}/">{{new.title}}</a></h4>
+						<div class="prize">￥{{new.price}}</div>
+					</li>
+					{%endfor%}
+				</ul>
+			</div>
+		</div>
+
+		{%block detail2%}{%endblock detail2%}
+
+	</div>
+
+{%endblock content%}

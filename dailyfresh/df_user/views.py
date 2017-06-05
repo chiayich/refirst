@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from df_user.models import DfUser
+from .models import DfUser
 
 
 def login(request):
@@ -18,13 +18,6 @@ def login(request):
                'user_name': user_name}
 
     return render(request, 'df_user/login.html', context)
-
-
-def index(request):
-    context = {
-        'title': '首页',
-    }
-    return render(request, 'index.html', context)
 
 
 def register(request):
