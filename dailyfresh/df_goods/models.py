@@ -14,7 +14,6 @@ class GoodsType(models.Model):
 
     def __unicode__(self):
         return self.title
-    pass
 
 
 class GoodsInfo(models.Model):
