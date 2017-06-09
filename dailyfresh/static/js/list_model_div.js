@@ -61,8 +61,9 @@ ListModelDiv.prototype = {
             success: (data) => {
                 let field_set = JSON.parse(data.data);
                 $.each(field_set, (index, item) => {
-                        let ele = '<li><h4><a href="#">'+ item.fields.title +'</a></h4>' +
-                            '<a href="#"><img src="/static/' + item.fields.pic+ '"/></a>' +
+                    console.log(item);
+                        let ele = '<li><h4><a href="'+ item.pk +'">'+ item.fields.title +'</a></h4>' +
+                            '<a href="'+ item.pk +'"><img src="/static/' + item.fields.pic+ '"/></a>' +
                             '<div class="prize">'+ item.fields.price +'</div>' +
                             '</li>';
                         this.goods_list.append($(ele));

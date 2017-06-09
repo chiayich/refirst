@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 
 def whether_login(func):
     def login_fun(request, *args, **kwargs):
-        if 'user_id' in request.sessions:
+        if 'user_id' in request.session:
             return func(request, *args, **kwargs)
         else:
             red = HttpResponseRedirect('/user/login/')

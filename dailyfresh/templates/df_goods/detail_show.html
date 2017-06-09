@@ -3,23 +3,26 @@
 {%block head%}
 <script>
 	function add() {
-	    num=parseFloat($('.num_show').val());
-	    $('.num_show').val(num+1);
-	    $('.num_show').blur();
+	    let num_show_ele = $('.num_show');
+	    let num = parseFloat(num_show_ele.val());
+	    num_show_ele.val(num+1);
+	    num_show_ele.blur();
     }
 
     function minus() {
-	    num=parseFloat($('.num_show').val());
+	    let num_show_ele = $('.num_show');
+	    let num=parseFloat(num_show_ele.val());
 	    if(num<=1){
 	        return;
 		}
-	    $('.num_show').val(num-1);
-	    $('.num_show').blur();
+	    num_show_ele.val(num-1);
+	    num_show_ele.blur();
     }
 
 	$(function () {
-		$('.num_show').keyup(function () {
-		    let wprice = parseInt($('.num_show').val());
+	    let num_show_ele = $('.num_show');
+		num_show_ele.keyup(function () {
+		    let wprice = parseInt(num_show_ele.val());
 		    num = wprice?wprice:0;
 		    if(num<=1){
 		        num=1;
@@ -34,13 +37,13 @@
 		$('#buy_btn').click(function () {
 			//判断是否登录，若未登录则提示先登录
 			if($('.login_btn').text().indexOf('登录')>=0){
-			    alert('请先登录后再购买');
+//			    alert('请先登录后再购买');
 			    location.href='/user/login/';
 				return;
 			}
 			//添加到购物车
-			num=parseInt($('.num_show').val());
-			$.get('/cart/add{{g.id}}_'+num+'/',function (data) {
+			let num=parseInt($('.num_show').val());
+			$.get('/cart/add/?gid={{g.id}}&&count='+num, function (data) {
 			    //转向订单页面
 				location.href='/order/?cart_id='+data.cart_id;
             });
@@ -115,8 +118,8 @@
 					$(".add_jump").fadeOut('fast',function () {});
 			});
 			//异步
-			num=parseInt($('.num_show').val());
-			$.get('/cart/add{{g.id}}_'+num+'/',function (data) {
+			let num = parseInt($('.num_show').val());
+			$.get('/cart/add/?gid={{g.id}}&&count='+num, function (data) {
 				$('#show_count').text(data.count);
             });
 		});

@@ -123,7 +123,22 @@ def detail_show(request, tid):
         'id': id,
         'cart_count': 0
     }
-    return render(request, 'df_goods/detail_show.html', context)
+    response = render(request, 'df_goods/detail_show.html', context)
+
+    scan_his = request.COOKIES.get('scan_his', '')
+    if scan_his == '':
+        response.set_cookie('scan_his', tid)
+    else:
+        scan_his = scan_his.split(',')
+        if tid in scan_his:
+            scan_his.remove(tid)
+        scan_his.insert(0, tid)
+        if len(scan_his) > 5:
+            scan_his.pop()
+        scan_his_end = ','.join(scan_his)
+        response.set_cookie('scan_his', scan_his_end)
+    return response
+
 #
 #
 # def cart_count(request):

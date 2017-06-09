@@ -26,9 +26,9 @@ class UserSite(models.Model):
 
 class UserInfo(models.Model):
     """ 用户详细信息"""
-    age = models.IntegerField()  # 年龄
-    gender = models.IntegerField()  # 性别
-    birth = models.DateField()  # 生日
+    age = models.IntegerField(blank=True)  # 年龄
+    gender = models.IntegerField(default=0)  # 性别
+    birth = models.DateField(auto_now=True)  # 生日
     nike_name = models.CharField(max_length=30)
     last_sign_in = models.DateTimeField(auto_now=True)  # 最后一次登录日期
     create_date = models.DateField(auto_now_add=True)  # 创建日期
